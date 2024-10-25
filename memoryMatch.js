@@ -2,7 +2,7 @@
 const cards = [
   { name: "Phishing", definition: "The fraudulent practice of sending emails or other messages purporting to be from reputable companies in order to induce individuals to reveal personal information, such as passwords and credit card numbers." },
   { name: "Strong Password", definition: "A strong password contains at least 12 characters, using a combination of letters, numbers, and symbols." },
-  { name: "Two-Factor Authentication", definition: "Requires not only a password and username but also something that only the user has on them, like a physical token or mobile device." },
+  { name: "Two-Factor Authentication", definition: "Two-factor authentication requires not only a password and username but also something that only the user has on them, like a physical token or mobile device." },
   { name: "Encryption", definition: "The process of converting information or data into a code, especially to prevent unauthorized access." },
   { name: "Malware", definition: "Software specifically designed to disrupt, damage, or gain unauthorized access to a computer system." },
   { name: "Social Engineering", definition: "The use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes." },
@@ -48,7 +48,7 @@ cardArray.forEach((card, index) => {
   
   const cardBack = document.createElement('div');
   cardBack.classList.add('card-back');
-  cardBack.innerText = card.name;
+  cardBack.innerText = card.type === 'term' ? card.name : card.name; // Shows term or definition
   
   cardInner.appendChild(cardFront);
   cardInner.appendChild(cardBack);
@@ -95,15 +95,20 @@ function flipCard() {
 
 // Check if the two flipped cards match
 function checkForMatch() {
-  const isMatch = (firstCard.dataset.type !== secondCard.dataset.type) &&
-                  (firstCard.dataset.name === secondCard.dataset.name || 
-                   firstCard.dataset.name === secondCard.innerText || 
-                   secondCard.dataset.name === firstCard.innerText);
+  // Check if one card is a term and the other is the matching definition
+  const isMatch = (
+    (firstCard.dataset.type === 'term' && secondCard.dataset.type === 'definition' &&
+      secondCard.dataset.name === firstCard.dataset.name) ||
+    (firstCard.dataset.type === 'definition' && secondCard.dataset.type === 'term' &&
+      firstCard.dataset.name === secondCard.dataset.name)
+  );
   
   if (isMatch) {
     matchSound.play();
     disableCards();
     matchedPairs++;
+    
+    // Check if all pairs are matched
     if (matchedPairs === cards.length) {
       stopTimer();
       gameOverSound.play();
@@ -155,29 +160,3 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
 // Start the game
 startTimer();
-
-function checkForMatch() {
-  // Check if one card is a term and the other is the matching definition
-  const isMatch = (
-    (firstCard.dataset.type === 'term' && secondCard.dataset.type === 'definition' &&
-      secondCard.innerText === firstCard.dataset.name) ||
-    (firstCard.dataset.type === 'definition' && secondCard.dataset.type === 'term' &&
-      firstCard.innerText === secondCard.dataset.name)
-  );
-  
-  if (isMatch) {
-    matchSound.play();
-    disableCards();
-    matchedPairs++;
-    
-    // Check if all pairs are matched
-    if (matchedPairs === cards.length) {
-      stopTimer();
-      gameOverSound.play();
-      promptForLeaderboard();
-      messageBox.innerText = "Congratulations! You've matched all terms and definitions!";
-    }
-  } else {
-    unflipCards();
-  }
-}
