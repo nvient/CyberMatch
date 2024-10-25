@@ -65,8 +65,7 @@ function flipCard() {
   if (this === firstCard) return;
 
   flipSound.play();
-  this.classList.add('flipped');
-  this.innerText = this.dataset.name;
+  this.classList.add('flipped'); // Add the 'flipped' class to the card container
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
