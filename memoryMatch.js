@@ -155,3 +155,29 @@ document.getElementById('reset-btn').addEventListener('click', () => {
 
 // Start the game
 startTimer();
+
+function checkForMatch() {
+  // Check if one card is a term and the other is the matching definition
+  const isMatch = (
+    (firstCard.dataset.type === 'term' && secondCard.dataset.type === 'definition' &&
+      secondCard.innerText === firstCard.dataset.name) ||
+    (firstCard.dataset.type === 'definition' && secondCard.dataset.type === 'term' &&
+      firstCard.innerText === secondCard.dataset.name)
+  );
+  
+  if (isMatch) {
+    matchSound.play();
+    disableCards();
+    matchedPairs++;
+    
+    // Check if all pairs are matched
+    if (matchedPairs === cards.length) {
+      stopTimer();
+      gameOverSound.play();
+      promptForLeaderboard();
+      messageBox.innerText = "Congratulations! You've matched all terms and definitions!";
+    }
+  } else {
+    unflipCards();
+  }
+}
