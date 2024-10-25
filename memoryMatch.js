@@ -39,6 +39,7 @@ let matchedPairs = 0;
 const gameBoard = document.getElementById('game-board');
 const messageBox = document.getElementById('message');
 const timerDisplay = document.getElementById('time');
+const leaderboardEntries = document.getElementById('leaderboard-entries');
 let timeElapsed = 0;
 let timerInterval;
 
@@ -93,86 +94,4 @@ function flipCard() {
   flipSound.play();
   this.classList.add('flipped'); // Add the 'flipped' class to the card container
 
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
-    return;
-  }
-
-  secondCard = this;
-  lockBoard = true;
-
-  checkForMatch();
-}
-
-// Check if the two flipped cards match
-function checkForMatch() {
-  const firstCardText = firstCard.dataset.name;
-  const secondCardText = secondCard.dataset.name;
-
-  console.log("First Card:", firstCardText, firstCard.dataset.type);
-  console.log("Second Card:", secondCardText, secondCard.dataset.type);
-
-  // Check if one is a term and the other is its corresponding definition
-  const isMatch = (
-    (firstCard.dataset.type === 'term' && termDefinitionMap[firstCardText] === secondCardText) ||
-    (secondCard.dataset.type === 'term' && termDefinitionMap[secondCardText] === firstCardText)
-  );
-
-  if (isMatch) {
-    matchSound.play();
-    disableCards();
-    matchedPairs++;
-
-    // Check if all pairs are matched
-    if (matchedPairs === cards.length) {
-      stopTimer();
-      gameOverSound.play();
-      promptForLeaderboard();
-      messageBox.innerText = "Congratulations! You've matched all terms and definitions!";
-    }
-  } else {
-    unflipCards();
-  }
-}
-
-// Disable matched cards
-function disableCards() {
-  firstCard.removeEventListener('click', flipCard);
-  secondCard.removeEventListener('click', flipCard);
-  resetBoard();
-}
-
-// Unflip cards if no match
-function unflipCards() {
-  setTimeout(() => {
-    firstCard.classList.remove('flipped');
-    secondCard.classList.remove('flipped');
-    resetBoard();
-  }, 1000);
-}
-
-// Reset variables for the next round
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
-}
-
-// Prompt for the leaderboard
-function promptForLeaderboard() {
-  const username = prompt("Enter your name for the leaderboard:");
-  if (username) {
-    const leaderboard = document.getElementById('leaderboard');
-    const scoreEntry = document.createElement('div');
-    scoreEntry.innerText = `${username} - Time: ${timeElapsed} seconds`;
-    leaderboard.appendChild(scoreEntry);
-  }
-}
-
-// Reset the game
-document.getElementById('reset-btn').addEventListener('click', () => {
-  location.reload();
-});
-
-// Start the game
-startTimer();
+  if
