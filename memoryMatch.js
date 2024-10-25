@@ -1,13 +1,13 @@
 // Cybersecurity terms and definitions as card pairs
 const cards = [
-  { name: "Phishing", definition: "The fraudulent practice of sending emails or other messages purporting to be from reputable companies in order to induce individuals to reveal personal information, such as passwords and credit card numbers." },
-  { name: "Strong Password", definition: "A strong password contains at least 12 characters, using a combination of letters, numbers, and symbols." },
-  { name: "Two-Factor Authentication", definition: "Two-factor authentication requires not only a password and username but also something that only the user has on them, like a physical token or mobile device." },
+  { name: "Phishing", definition: "The fraudulent practice of sending emails or other messages." },
+  { name: "Strong Password", definition: "Contains at least 12 characters, using a combination of letters, numbers, and symbols." },
+  { name: "Two-Factor Authentication", definition: "Requires not only a password and username but also a physical token or mobile device." },
   { name: "Encryption", definition: "The process of converting information or data into a code, especially to prevent unauthorized access." },
-  { name: "Malware", definition: "Software specifically designed to disrupt, damage, or gain unauthorized access to a computer system." },
-  { name: "Social Engineering", definition: "The use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes." },
-  { name: "Firewall", definition: "A network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules." },
-  { name: "VPN", definition: "A virtual private network extends a private network across a public network, enabling users to send and receive data securely." }
+  { name: "Malware", definition: "Malicious software specifically designed to disrupt, damage, or gain unauthorized access to a computer system." },
+  { name: "Social Engineering", definition: "The use of deception to manipulate individuals into divulging confidential or personal information." },
+  { name: "Firewall", definition: "Monitors and controls incoming and outgoing network traffic based on predetermined security rules." },
+  { name: "VPN", definition: "Extends a private network across a public network, enabling users to send and receive data securely." }
 ];
 
 // Create a mapping of terms to definitions for easier matching
