@@ -18,34 +18,66 @@
       grid-template-columns: repeat(4, 200px);
       grid-gap: 15px;
     }
-   .card {
-  width: 200px;
-  height: 250px;
-  background-color: #2980b9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 8px;
-  background-image: url('images/BSNFullV_Color.png');
-  background-size: cover;
-  transition: transform 0.3s ease;
-  backface-visibility: hidden;
-}
-
-.flipped {
-  background-color: #2ecc71;
-  transform: rotateY(180deg);
-}
+    /* Card Container */
+    .card {
+      width: 200px;
+      height: 250px;
+      perspective: 1000px; /* 3D effect */
+    }
+    
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    
+    .card.flipped .card-inner {
+      transform: rotateY(180deg); /* Flips the card */
+    }
+    
+    /* Front and Back Design */
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden; /* Ensures the back face isn't visible when flipped */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+    }
+    
+    /* Front of the card (Logo) */
+    .card-front {
+      background-image: url('images/BSNFullV_Color.png');
+      background-size: cover;
+      background-position: center;
+    }
+    
+    /* Back of the card (Text/Definition) */
+    .card-back {
+      background-color: #2ecc71;
+      color: white;
+      font-size: 16px;
+      padding: 10px;
+      transform: rotateY(180deg); /* Flips the back of the card */
+    }
+    
     #message {
       margin-top: 20px;
       font-size: 18px;
       text-align: center;
     }
+    
+    #timer {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+    }
+    
     #reset-btn {
       margin-top: 20px;
       padding: 10px 20px;
@@ -56,11 +88,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    #timer {
-      margin-top: 20px;
-      font-size: 18px;
-      text-align: center;
-    }
+    
     #leaderboard {
       margin-top: 20px;
     }
@@ -72,6 +100,7 @@
   <div id="timer">Time: <span id="time">0</span> seconds</div>
   <button id="reset-btn">Reset Game</button>
   <div id="leaderboard"></div>
+  
   <script src="memoryMatch.js"></script>
 </body>
 </html>
