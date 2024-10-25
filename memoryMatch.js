@@ -39,9 +39,23 @@ const gameOverSound = new Audio('sounds/Announcer Nice Job.wav');
 cardArray.forEach((card, index) => {
   const cardElement = document.createElement('div');
   cardElement.classList.add('card');
+  
+  const cardInner = document.createElement('div');
+  cardInner.classList.add('card-inner');
+  
+  const cardFront = document.createElement('div');
+  cardFront.classList.add('card-front');
+  
+  const cardBack = document.createElement('div');
+  cardBack.classList.add('card-back');
+  cardBack.innerText = card.name;
+  
+  cardInner.appendChild(cardFront);
+  cardInner.appendChild(cardBack);
+  cardElement.appendChild(cardInner);
+  
   cardElement.dataset.name = card.name;
   cardElement.dataset.type = card.type;
-  cardElement.innerText = "Cyber Card";
   cardElement.addEventListener('click', flipCard);
   gameBoard.appendChild(cardElement);
 });
@@ -113,8 +127,6 @@ function unflipCards() {
   setTimeout(() => {
     firstCard.classList.remove('flipped');
     secondCard.classList.remove('flipped');
-    firstCard.innerText = "Cyber Card";
-    secondCard.innerText = "Cyber Card";
     resetBoard();
   }, 1000);
 }
