@@ -48,7 +48,7 @@ cardArray.forEach((card, index) => {
   
   const cardBack = document.createElement('div');
   cardBack.classList.add('card-back');
-  cardBack.innerText = card.type === 'term' ? card.name : card.name; // Shows term or definition
+  cardBack.innerText = card.name; // Display term or definition
   
   cardInner.appendChild(cardFront);
   cardInner.appendChild(cardBack);
@@ -93,21 +93,12 @@ function flipCard() {
   checkForMatch();
 }
 
-// Check if the two flipped cards match
+// Simplified checkForMatch function
 function checkForMatch() {
-  // Log the cards being compared
-  console.log("First Card:", firstCard.dataset.name, firstCard.dataset.type);
-  console.log("Second Card:", secondCard.dataset.name, secondCard.dataset.type);
-
-  const isMatch = (
-    (firstCard.dataset.type === 'term' && secondCard.dataset.type === 'definition' &&
-      secondCard.dataset.name === firstCard.dataset.name) ||
-    (firstCard.dataset.type === 'definition' && secondCard.dataset.type === 'term' &&
-      firstCard.dataset.name === secondCard.dataset.name)
-  );
+  // Verify if the names match and one is a term and the other is a definition
+  const isMatch = (firstCard.dataset.name === secondCard.dataset.name) && (firstCard.dataset.type !== secondCard.dataset.type);
   
   if (isMatch) {
-    console.log("Match found!");
     matchSound.play();
     disableCards();
     matchedPairs++;
@@ -120,7 +111,6 @@ function checkForMatch() {
       messageBox.innerText = "Congratulations! You've matched all terms and definitions!";
     }
   } else {
-    console.log("No match.");
     unflipCards();
   }
 }
