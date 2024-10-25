@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Memory Match</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    #game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 10px;
+    }
+    .card {
+      width: 100px;
+      height: 150px;
+      background-color: #2980b9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .flipped {
+      background-color: #2ecc71;
+    }
+    #message {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-board"></div>
+  <div id="message"></div>
+  
+  <script src="memoryMatch.js"></script>
+</body>
+</html>
