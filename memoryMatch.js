@@ -95,7 +95,10 @@ function flipCard() {
 
 // Check if the two flipped cards match
 function checkForMatch() {
-  // Check if one card is a term and the other is the matching definition
+  // Log the cards being compared
+  console.log("First Card:", firstCard.dataset.name, firstCard.dataset.type);
+  console.log("Second Card:", secondCard.dataset.name, secondCard.dataset.type);
+
   const isMatch = (
     (firstCard.dataset.type === 'term' && secondCard.dataset.type === 'definition' &&
       secondCard.dataset.name === firstCard.dataset.name) ||
@@ -104,6 +107,7 @@ function checkForMatch() {
   );
   
   if (isMatch) {
+    console.log("Match found!");
     matchSound.play();
     disableCards();
     matchedPairs++;
@@ -116,6 +120,7 @@ function checkForMatch() {
       messageBox.innerText = "Congratulations! You've matched all terms and definitions!";
     }
   } else {
+    console.log("No match.");
     unflipCards();
   }
 }
